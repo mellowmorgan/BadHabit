@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BadHabit">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="true" />
+        <activity
             android:name=".CalendarEntryActivity"
             android:exported="true" />
         <activity
