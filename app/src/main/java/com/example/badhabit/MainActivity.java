@@ -68,5 +68,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
+    public void launchTrackerPageActivity(View v){
+        Intent i = new Intent(this, TrackerPageActivity.class);
+        startActivity(i);
+    }
 
 }
