@@ -2,17 +2,13 @@ package com.example.badhabit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
-public class CalendarEntryActivity extends AppCompatActivity {
+public class CalendarEntryPopUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar_entry);
-        Intent i = getIntent();
+        setContentView(R.layout.activity_calendar_entry_pop_up);
     }
-
 }

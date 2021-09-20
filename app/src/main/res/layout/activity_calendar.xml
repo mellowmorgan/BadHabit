@@ -1,54 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarActivity">
+    tools:context=".MainActivity">
 
-    <org.naishadhparmar.zcustomcalendar.CustomCalendar
-        android:id="@+id/calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </org.naishadhparmar.zcustomcalendar.CustomCalendar>
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Edit Calendar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendar" />
-
-    <Button
-        android:id="@+id/button12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete Calendar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button11"
-        app:layout_constraintVertical_bias="0.077" />
-
+    <!-- Add TextView to display the date -->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/date_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TEXT"
-        app:layout_constraintBottom_toTopOf="@+id/calendar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="20dp"
+        android:text="Set the Date"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold" />
 
+    <CalendarView
+        android:id="@+id/calendar"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </CalendarView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
