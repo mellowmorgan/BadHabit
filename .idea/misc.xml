@@ -5,12 +5,18 @@
       <map>
         <entry key="app/src/main/res/layout/absent_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_calendar_adapter.xml" value="0.11354166666666667" />
         <entry key="app/src/main/res/layout/activity_calendar_entry.xml" value="0.1381340579710145" />
+        <entry key="app/src/main/res/layout/activity_calendar_entry_pop_up.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_calendar_view_holder.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main2.xml" value="0.3567921440261866" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_tracker_page.xml" value="0.1381340579710145" />
+        <entry key="app/src/main/res/layout/calendar_cell.xml" value="0.16077898550724637" />
+        <entry key="app/src/main/res/layout/calendar_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/current_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/default_view.xml" value="0.45" />
         <entry key="app/src/main/res/layout/good_view.xml" value="0.16077898550724637" />
