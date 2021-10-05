@@ -11,6 +11,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 //import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +59,9 @@ public class CalendarActivity extends AppCompatActivity implements Serializable{
         firstLoad = loadEval;
         id = Integer.parseInt(sID);
         dmList = db.getAllDatesForUser(id);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyyMMdd");
+        Date currentDate = new Date();
+        String strCurrentDate = formatter.format(currentDate);
         //MyViewModel model = new ViewModelProvider(this).get(MyViewModel.class);
 
 //        Intent intent = getIntent();
@@ -79,6 +84,17 @@ public class CalendarActivity extends AppCompatActivity implements Serializable{
 
         mCalendarView = (MCalendarView) findViewById(R.id.calendarView);
 
+
+
+        TextView tracker = findViewById(R.id.textViewTracker);
+        int intTracker = db.goodDayTracker(id, strCurrentDate);
+        String strTracker = Integer.toString(intTracker);
+        if (intTracker==1){
+        tracker.setText("Tracker: " + strTracker + " good day so far.");}
+        else if (intTracker>1){
+            tracker.setText("Tracker: " + strTracker + " good days!");
+
+        }
         MCalendarView date = mCalendarView.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(View view, DateData date) {

@@ -5,11 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 
 import androidx.annotation.Nullable;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -129,6 +133,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return dm;
     }
+
+
+
     public UserModel fetchUser(String email){
         UserModel uM;
         String queryString = "SELECT * FROM USER_TABLE WHERE USER_EMAIL=\"" + email + "\"";
@@ -150,6 +157,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return uM;
+    }
+
+    public int goodDayTracker(int id, String currentDate){
+        //find yesterday in database see if marked
+        int trackerCounter=0;
+
+        //get yesterday date string
+        DateMarkedModel yesterdayModel;
+        String dateYesterday;
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Calendar cal = Calendar.getInstance();
+        boolean check=false;
+        do {
+            try {
+                Date date = dateFormat.parse(currentDate);
+                cal.setTime(date);
+                cal.add(Calendar.DATE, -1);
+                dateYesterday = dateFormat.format(cal.getTime());
+                yesterdayModel = fetchDate(id, dateYesterday);
+                check = doesDateMarkedExist(id, dateYesterday);
+                if (yesterdayModel.getHowDay().equals("good")) {
+                    trackerCounter++;
+                }
+            } catch (Exception E) {
+                return -1;
+            }
+        }while(check==true);
+        return trackerCounter;
+
+
+
     }
 
     public List<UserModel> getAll() {
