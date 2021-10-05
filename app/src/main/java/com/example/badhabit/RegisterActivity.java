@@ -62,9 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             db.addOne(userModel);
 
-            //strings, store in database, create user database somewhere else???
-            //need to create separate database for trackers/calendars
-            //launch login after success, message account created! please log in.
+                //launch login after success, message account created! please log in.
             Toast.makeText(this, "SUCCESS!!!!",Toast.LENGTH_SHORT).show();
 
 

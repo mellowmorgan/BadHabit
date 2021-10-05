@@ -91,26 +91,17 @@ public class CalendarEntryPopUpActivity extends AppCompatActivity implements Ser
         }
 
     public void onSave(View v){
-        Intent intent = getIntent();
         Intent i = new Intent(this, CalendarActivity.class);
-//        i.putExtra("storedArray", storedArr);
-//        i.putExtra("howDay", howDaySelector);
-//        i.putExtra("date", s);
-//        bool = true;
-//       i.putExtra("evaluator", bool);
 
         int idInt = Integer.parseInt(id);
         dmModel = new DateMarkedModel(idInt, sDate, howDaySelector);
         //if date exists in row
         //delete date, add date
         if(db.doesDateMarkedExist(idInt, sDate)){
-            //delete date
-            //add date
+
             db.deleteDateMarked(idInt, sDate);
         }
         db.addDateMarked(dmModel);
-        //if date doesn't exist
-//        db.addDateMarked(dmModel);
 
         i.putExtra("ID", id);
         startActivity(i);

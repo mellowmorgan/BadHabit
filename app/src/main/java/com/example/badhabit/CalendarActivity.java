@@ -62,24 +62,7 @@ public class CalendarActivity extends AppCompatActivity implements Serializable{
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyyMMdd");
         Date currentDate = new Date();
         String strCurrentDate = formatter.format(currentDate);
-        //MyViewModel model = new ViewModelProvider(this).get(MyViewModel.class);
-
-//        Intent intent = getIntent();
-//        String how = intent.getStringExtra("howDay");
-//        String dtSelected = intent.getStringExtra("date");
-
-//        if (arr.size()>0){
-//            storedArr=arr;
-//        }
-//        else{
-//            storedArr=new ArrayList<>();
-//        }
-//        boolean eval = intent.getBooleanExtra("evaluator", false);
-//        if (eval==true) {
-//            hasSavedDay(how, dtSelected);
-//        }
-        //DETERMINE IF WE NEED TO PUT SAVED MARKED DAYS TO CALENDAR UPON LOAD
-        datesMarkedLoader(dmList);
+               datesMarkedLoader(dmList);
 
 
         mCalendarView = (MCalendarView) findViewById(R.id.calendarView);
@@ -183,14 +166,6 @@ public class CalendarActivity extends AppCompatActivity implements Serializable{
             mCalendarView.unMarkDate(dateYear, dateMonth, dateDay);}
         db.deleteAllDatesMarked(id);
 
-//     else{
-//         Toast.makeText(this, "Calendar clear", Toast.LENGTH_SHORT).show();
-//     }
-
-//    mCalendarView.getMarkedDates().getAll().clear();
-//    if dates.size()>1
-//    DateData d = dates.get(i);
-//    mCalendarView.unMarkDate(d);
 }
 
 
