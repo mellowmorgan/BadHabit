@@ -10,16 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
         <activity
             android:name=".SettingsActivity"
             android:exported="true" />
         <activity
         android:name=".CalendarEntryPopUpActivity"
         android:exported="true" />
-        <activity
-            android:name=".TrackerPageActivity"
-            android:exported="true" />
         <activity
             android:name=".CalendarActivity"
             android:exported="true" />

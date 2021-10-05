@@ -11,27 +11,58 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class CalendarEntryPopUpActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+
+import sun.bob.mcalendarview.vo.DateData;
+
+public class CalendarEntryPopUpActivity extends AppCompatActivity implements Serializable,CompoundButton.OnCheckedChangeListener {
     private Switch aSwitch;
     private Switch bSwitch;
+    private String id;
     private String howDaySelector = "nothing";
+    private ArrayList<String> storedArr;
+    private boolean bool;
+    DatabaseHelper db;
+    String sDate;
+    DateMarkedModel dmModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        bool=false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_entry_pop_up);
         Intent i = getIntent();
-        String s = i.getStringExtra("date");
+        db = new DatabaseHelper(this);
+        sDate = i.getStringExtra("date");
+        id = i.getStringExtra("id");
         TextView t = findViewById(R.id.textView2);
-        t.setText(s);
+        t.setText(sDate);
+
         aSwitch = findViewById(R.id.switch_a);
         bSwitch = findViewById(R.id.switch_b);
+
+        DateMarkedModel dm = db.fetchDate((Integer.parseInt(id)), sDate);
+
+        String howClickedDay = dm.getHowDay();
+        if (howClickedDay.equals("bad")) {
+            bSwitch.setChecked(true);
+            aSwitch.setClickable(false);
+        }
+        else if (howClickedDay.equals("good")) {
+            aSwitch.setChecked(true);
+            bSwitch.setClickable(false);
+        }
         aSwitch.setOnCheckedChangeListener(this);
         bSwitch.setOnCheckedChangeListener(this);
+
 
 
     }
     @Override
     public void onCheckedChanged(CompoundButton btn, boolean isChecked){
+
+
         if (btn==aSwitch){
             if (isChecked){
                 showMessage("Switch Good Day");
@@ -61,15 +92,37 @@ public class CalendarEntryPopUpActivity extends AppCompatActivity implements Com
 
     public void onSave(View v){
         Intent intent = getIntent();
-        String s = intent.getStringExtra("date");
         Intent i = new Intent(this, CalendarActivity.class);
-        i.putExtra("howDay", howDaySelector);
-        i.putExtra("date", s);
+//        i.putExtra("storedArray", storedArr);
+//        i.putExtra("howDay", howDaySelector);
+//        i.putExtra("date", s);
+//        bool = true;
+//       i.putExtra("evaluator", bool);
+
+        int idInt = Integer.parseInt(id);
+        dmModel = new DateMarkedModel(idInt, sDate, howDaySelector);
+        //if date exists in row
+        //delete date, add date
+        if(db.doesDateMarkedExist(idInt, sDate)){
+            //delete date
+            //add date
+            db.deleteDateMarked(idInt, sDate);
+        }
+        db.addDateMarked(dmModel);
+        //if date doesn't exist
+//        db.addDateMarked(dmModel);
+
+        i.putExtra("ID", id);
         startActivity(i);
 
     }
     public void onCancel(View v){
-        Intent i = new Intent(this, CalendarActivity.class);
+
+       Intent i = new Intent(this, CalendarActivity.class);
+        i.putExtra("ID", id);
+        //no longer first time loading, don't remark all the dates
+
+        i.putExtra("EVAL",false);
         startActivity(i);
 
     }
