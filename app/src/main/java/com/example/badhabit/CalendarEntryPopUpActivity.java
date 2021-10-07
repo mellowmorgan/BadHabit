@@ -65,14 +65,14 @@ public class CalendarEntryPopUpActivity extends AppCompatActivity implements Ser
 
         if (btn==aSwitch){
             if (isChecked){
-                showMessage("Switch Good Day");
+                showMessage("Another good day!");
                 bSwitch.setClickable(false);
                 howDaySelector = "good";
             }
         }
         if (btn==bSwitch){
             if (isChecked){
-                showMessage("Switch Bad Day");
+                showMessage("It's okay. You got this.");
                 aSwitch.setClickable(false);
                 howDaySelector = "bad";
 

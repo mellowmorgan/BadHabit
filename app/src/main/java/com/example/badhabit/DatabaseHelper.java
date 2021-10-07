@@ -159,31 +159,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return uM;
     }
 
-    public int goodDayTracker(int id, String currentDate){
+    public int goodDayTracker(int id){
+
         //find yesterday in database see if marked
         int trackerCounter=0;
-
         //get yesterday date string
         DateMarkedModel yesterdayModel;
         String dateYesterday;
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat formatter = new SimpleDateFormat("MMddyyyy");
+        Date currentDate = new Date();
         Calendar cal = Calendar.getInstance();
-        boolean check=false;
+        int i=-1;
+        boolean check;
         do {
-            try {
-                Date date = dateFormat.parse(currentDate);
-                cal.setTime(date);
-                cal.add(Calendar.DATE, -1);
-                dateYesterday = dateFormat.format(cal.getTime());
-                yesterdayModel = fetchDate(id, dateYesterday);
-                check = doesDateMarkedExist(id, dateYesterday);
+                cal.setTime(currentDate);
+                cal.add(Calendar.DATE, i);
+                dateYesterday = formatter.format(cal.getTime());
+                yesterdayModel = this.fetchDate(id, dateYesterday);
+                check = this.doesDateMarkedExist(id, dateYesterday);
                 if (yesterdayModel.getHowDay().equals("good")) {
                     trackerCounter++;
+                    i--;
                 }
-            } catch (Exception E) {
-                return -1;
-            }
-        }while(check==true);
+
+        }while((check==true) && (yesterdayModel.getHowDay().equals("good")));
         return trackerCounter;
 
 

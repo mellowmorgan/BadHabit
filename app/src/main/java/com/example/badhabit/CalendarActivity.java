@@ -9,6 +9,7 @@ import android.view.View;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Date;
 import java.text.DateFormat;
@@ -59,25 +60,12 @@ public class CalendarActivity extends AppCompatActivity implements Serializable{
         firstLoad = loadEval;
         id = Integer.parseInt(sID);
         dmList = db.getAllDatesForUser(id);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyyMMdd");
-        Date currentDate = new Date();
-        String strCurrentDate = formatter.format(currentDate);
-               datesMarkedLoader(dmList);
-
+        datesMarkedLoader(dmList);
+        trackerSet();
 
         mCalendarView = (MCalendarView) findViewById(R.id.calendarView);
 
 
-
-        TextView tracker = findViewById(R.id.textViewTracker);
-        int intTracker = db.goodDayTracker(id, strCurrentDate);
-        String strTracker = Integer.toString(intTracker);
-        if (intTracker==1){
-        tracker.setText("Tracker: " + strTracker + " good day so far.");}
-        else if (intTracker>1){
-            tracker.setText("Tracker: " + strTracker + " good days!");
-
-        }
         MCalendarView date = mCalendarView.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(View view, DateData date) {
@@ -165,6 +153,23 @@ public class CalendarActivity extends AppCompatActivity implements Serializable{
             int dateYear = Integer.parseInt(sD.substring(4, 8));
             mCalendarView.unMarkDate(dateYear, dateMonth, dateDay);}
         db.deleteAllDatesMarked(id);
+        trackerSet();
+
+}
+
+public void trackerSet(){
+    TextView tracker = findViewById(R.id.textViewTracker);
+    int intTracker = db.goodDayTracker(id);
+    String strTracker = Integer.toString(intTracker);
+    if (intTracker==1){
+        tracker.setText("Tracker: " + strTracker + " good day so far.");}
+    else if (intTracker>1){
+        tracker.setText("Tracker: " + strTracker + " good days!");
+
+    }
+    else {
+        tracker.setText("A clean slate; you got this!");
+    }
 
 }
 
