@@ -39,7 +39,8 @@ dependencies {
 
     // optional - Guava support for Room, including Optional and ListenableFuture
     implementation "androidx.room:room-guava:$room_version"
-
+    //noinspection GradleCompatible
+    implementation "com.android.support:appcompat-v7:27.1.1"
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
 

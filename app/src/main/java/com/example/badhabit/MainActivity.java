@@ -6,11 +6,18 @@
 package com.example.badhabit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.TooltipCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -20,14 +27,15 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper db;
-    String email;
     String id;
+    UserModel um;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loadDashboard();
+
     }
 
 
@@ -35,13 +43,21 @@ public class MainActivity extends AppCompatActivity {
     public void loadDashboard() {
 
         Intent i = getIntent();
-        email = i.getStringExtra("EMAIL");
-        id = email = i.getStringExtra("ID");
-        String password = i.getStringExtra("PASSWORD");
-        String username = i.getStringExtra("USERNAME");
+        try{String msg = i.getStringExtra("NEWNAMEMESSAGE");
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){}
+//        ImageButton bSettings = (ImageButton) findViewById(R.id.imageButton3);
+//        String myString = "Settings";
+//        CharSequence s = "Settings";
+//        TooltipCompat.setTooltipText(bSettings, s);
+
         id = i.getStringExtra("ID");
+        db = new DatabaseHelper(this);
+        um = db.fetchUserByID(Integer.parseInt(id));
+        String userName = um.getUsername();
         TextView t = findViewById(R.id.welcomeMessage);
-        t.setText("Welcome, " + username);
+        t.setText("Welcome, " + userName);
         SimpleDateFormat sdf2 = new SimpleDateFormat("EEEE");
         String stringDate2 = sdf2.format(new Date());
         Date date = new Date();
@@ -99,12 +115,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchSettingsActivity(View v) {
         Intent i = new Intent(this, SettingsActivity.class);
+        i.putExtra("ID", id);
         startActivity(i);
     }
 
     public void launchCalendarActivity(View v) {
         Intent i = new Intent(this, CalendarActivity.class);
-        i.putExtra("EMAIL", email);
+
         i.putExtra("ID", id);
       //tell the calendaractivity it's first time loading w true
         i.putExtra("EVAL",true);

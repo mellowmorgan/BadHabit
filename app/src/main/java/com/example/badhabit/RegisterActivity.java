@@ -64,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //launch login after success, message account created! please log in.
             Toast.makeText(this, "SUCCESS!!!!",Toast.LENGTH_SHORT).show();
+            launchLogin();
 
 
         }

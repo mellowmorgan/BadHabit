@@ -9,13 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".UpdateAccountActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DeleteActivity"
+            android:exported="true" />
         <activity
             android:name=".SettingsActivity"
             android:exported="true" />
         <activity
-        android:name=".CalendarEntryPopUpActivity"
-        android:exported="true" />
+            android:name=".CalendarEntryPopUpActivity"
+            android:exported="true" />
         <activity
             android:name=".CalendarActivity"
             android:exported="true" />

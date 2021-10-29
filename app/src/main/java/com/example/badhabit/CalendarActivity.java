@@ -22,6 +22,7 @@ import sun.bob.mcalendarview.MCalendarView;
 import sun.bob.mcalendarview.MarkStyle;
 
 import sun.bob.mcalendarview.listeners.OnDateClickListener;
+import sun.bob.mcalendarview.listeners.OnMonthChangeListener;
 import sun.bob.mcalendarview.vo.DateData;
 
 public class CalendarActivity extends AppCompatActivity implements Serializable{
@@ -64,6 +65,12 @@ public class CalendarActivity extends AppCompatActivity implements Serializable{
         trackerSet();
 
         mCalendarView = (MCalendarView) findViewById(R.id.calendarView);
+        mCalendarView.setOnMonthChangeListener(new OnMonthChangeListener() {
+            @Override
+            public void onMonthChange(int year, int month) {
+                Toast.makeText(CalendarActivity.this, String.format("%d-%d", year, month), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         MCalendarView date = mCalendarView.setOnDateClickListener(new OnDateClickListener() {

@@ -84,18 +84,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String queryString = "DELETE FROM USER_TABLE";
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(queryString);
+        db.close();
 
+    }
+    public void deleteUser(int id){
+        String queryString = "DELETE FROM USER_TABLE WHERE ID=\"" + id + "\"";
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(queryString);
+        db.close();
     }
     public void deleteAllDatesMarked(int id){
         String queryString = "DELETE FROM DATE_TABLE WHERE DATE_USER_ID=\"" + id + "\"";
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(queryString);
+        db.close();
 
     }
     public void deleteDateMarked(int id, String date){
         String queryString = "DELETE FROM DATE_TABLE WHERE DATE_USER_ID=\"" + id + "\"" + " AND " + "DATE=\"" + date + "\"";
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(queryString);
+        db.close();
 
     }
     public boolean doesDateMarkedExist(int id, String date){
@@ -134,6 +143,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return dm;
     }
 
+    public UserModel fetchUserByID(int id){
+        UserModel uM;
+        String queryString = "SELECT * FROM USER_TABLE WHERE ID=\"" + id + "\"";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString,null);
+        if (cursor.moveToFirst()) {
+            int userID = cursor.getInt(0);
+            String userName = cursor.getString(1);
+            String userEmail = cursor.getString(2);
+            String userPassword = cursor.getString(3);
+            uM = new UserModel(userID, userName, userEmail, userPassword);
+
+        }
+
+        else {
+            uM = new UserModel(-1, "null", "null", "null");
+
+        }
+        cursor.close();
+        db.close();
+        return uM;
+    }
 
 
     public UserModel fetchUser(String email){
@@ -234,6 +265,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnDateList;
 
     }
+    public UserModel updatePassword(int id, String newPassword) {
+        String queryString = "UPDATE USER_TABLE SET USER_PASSWORD=\"" + newPassword + "\"" + " WHERE ID=" + id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(queryString);
+        db.close();
+        UserModel um = fetchUserByID(id);
+        return um;
+    }
+
+    public UserModel updateUserName(int id, String newName) {
+        String queryString = "UPDATE USER_TABLE SET USER_NAME=\"" + newName + "\"" + " WHERE ID=" + id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(queryString);
+        UserModel um = fetchUserByID(id);
+        db.close();
+
+        return um;
+    }
+
+
     public List<DateMarkedModel> getAllDatesForUser(int dateUserID) {
 
         List<DateMarkedModel> returnUserDateList = new ArrayList<>();

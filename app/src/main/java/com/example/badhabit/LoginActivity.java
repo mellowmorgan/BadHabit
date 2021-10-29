@@ -14,11 +14,20 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     UserModel userModel;
+    int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setupHyperlink();
+        try{
+            Intent i = getIntent();
+            String deleteMessage = i.getStringExtra("SUCCESSDELETE");
+            Toast.makeText(this,deleteMessage, Toast.LENGTH_SHORT).show();
+        }
+        catch(Exception e){
+
+        }
     }
 
     public void setupHyperlink(){
@@ -39,10 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         boolean doesUserExist = db.userAuthenticate(inputEmail, inputPassword);
         if (doesUserExist){
            userModel = db.fetchUser(inputEmail);
-           int id = userModel.getId();
-
-
-          launchMainActivity(id, inputEmail, inputPassword, userModel);
+           id = userModel.getId();
+          launchMainActivity(id);
 
         }
 
@@ -51,15 +58,12 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-    public void launchMainActivity(int id, String email, String password, UserModel user){
+    public void launchMainActivity(int id){
         Intent i = new Intent(this, MainActivity.class);
-        i.putExtra("EMAIL", email);
         String inputID = Integer.toString(id);
         i.putExtra("ID", inputID);
-        i.putExtra("PASSWORD", password);
-        String username = user.getUsername();
-        i.putExtra("USERNAME", username);
-
+        Boolean loggedIn = true;
+        i.putExtra("LOGGEDIN", loggedIn);
         startActivity(i);
 
     }

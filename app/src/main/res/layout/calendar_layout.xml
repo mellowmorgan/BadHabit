@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+
     <TextView
         android:id="@+id/textViewTracker"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+
+        android:textSize="20sp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <sun.bob.mcalendarview.MCalendarView
         android:id="@+id/calendarView"
-        android:layout_width="400dp"
+        android:layout_width="385dp"
         android:layout_height="400dp"
-        android:layout_marginTop="20dp"
-        tools:context=".CalendarActivity" />
+        android:layout_marginTop="36dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTracker"
+        tools:context=".CalendarActivity">
+
+
+    </sun.bob.mcalendarview.MCalendarView>
 
     <Button
         android:id="@+id/button4"
         android:layout_width="200dp"
-        android:layout_marginTop="60dp"
         android:layout_height="wrap_content"
+        android:onClick="clearCalendar"
         android:text="Clear Calendar"
-        android:onClick="clearCalendar"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintVertical_bias="0.421" />
 
 
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
